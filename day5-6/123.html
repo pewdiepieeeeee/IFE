@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout</title>
+    <style>
+        body{
+            margin: 0;
+            font-size: 10px;
+            min-width: 960px;
+        }
+        /*header*/
+        header  {
+            width: 100%;
+            background: #333333;
+        }
+        header .head{
+            color:  white;
+            margin: 0 auto;
+            padding: 20px 0 30px;
+            width: 960px;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        header ul{
+            margin: 0;
+            padding: 0;
+            float: right;
+            list-style-type: none;
+        }
+        header ul>li{
+            float: left;
+        }
+        header a{
+            color:  white   ;
+            font-size: 10px;
+            display: block;padding: 4px 4px;
+        }
+        /*banner*/
+        .banner{
+            width: 100%;
+            background-color: #66BB33;
+            height: 300px;
+            position: relative;
+        }
+        .banner ul{
+            display: flex;
+            align-items: flex-end;
+            bottom: 0;
+            position: absolute;
+            right: calc((100% - 960px)/2);
+            list-style-type: none;
+        }
+        .banner li{
+            padding: 10px 12px;
+            border:#5A7E43 1px solid;
+            margin: 0 3px;
+            background: #B2DD99;
+            color: #66BB33;
+        }
+        .banner li.active{
+            padding-top: 20px;
+            background-color: #E0F1D6;
+            color: #5A7E43;
+        }
+        /*nav*/
+        nav{
+            width: 960px;
+            margin: 15px auto 0;
+            border-bottom: 1px #DBDBDB solid;
+            overflow: auto;
+            padding: 0 calc((100% - 960px)/2);
+        }
+        nav ul{
+            margin: 0;
+            padding: 0 5px;
+            list-style-type: none;
+        }
+        nav ul>li{
+            display: block;
+            float: left;
+            padding: 10px 15px;
+            border:  1px #DBDBDB solid;
+            border-radius: 15px 15px 0 0;
+            background: #EEEEEE;
+        }
+        nav ul>li.active{
+            background: white;
+            border-bottom-color: white;
+        }
+        /*content*/
+        .content{
+            display: flex;
+            margin: 0 auto;
+            width: 960px;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+        .content div{
+            padding: 80px;
+            border: 1px #DBDBDB solid;
+            margin: 5px;
+            flex: 1 0 auto;
+            text-align: center;
+        }
+        /*footer*/
+        footer{
+            width: 100%;
+            background: #666666;
+            margin-top: 10px;
+            text-align: center;
+        }
+        address{
+            color: white;
+            font-style: normal;
+            text-decoration: none;
+            margin: 0 auto;
+            padding: 10px 0 40px 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="head">Logo
+    <ul>
+        <li><a href="#">Github</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+    </div>
+</header>
+<div class="banner">
+    <ul>
+        <li>1</li>
+        <li class="active">2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<nav>
+    <ul>
+        <li class="active">HOME</li>
+        <li>PROFILE</li>
+        <li>ABOUT</li>
+    </ul>
+</nav>
+<div class="content">
+    <div>This is Content 1</div>
+    <div>MaybeContent 2</div>
+    <div>Content 3</div>
+    <div>Content 4</div>
+    <div>Content 5</div>
+    <div>Content 6</div>
+    <div>Content 7</div>
+    <div>Content 8</div>
+    <div>Content 9</div>
+    <div>Content 10</div>
+</div>
+<footer>
+    <address>
+        &copy 2018 ife.baidu.com
+    </address>
+</footer>
+</body>
+</html>
