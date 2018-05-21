@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+<h1>想看秘密请按F12</h1>
+    <script>
+    for(var i=0;i<101;i++) {
+      var str=i;
+      str=str.toString();
+      // var x=str.indexOf("3");
+      if (i==0) {
+        console.log(0)
+      }
+      else if(i%3==0 || -1<str.indexOf("3")) {
+         console.log(","+"PA");
+      }
+     else {
+       console.log(","+i);
+     }
+    }
+    </script>
+      
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+    <style>
+      table {
+        border:5px solid red;
+        padding: 5px;
+      }
+      td {
+        border: 2px solid yellow;
+        margin-right: 3px;
+      }
+    </style>
+</head>
+<body>        
+
+    <script>
+    //console里显示
+      for(var i=1;i<10;i++) {
+        for(var j=1;j<=i;j++) {
+          console.log(i+"*"+j+"="+i*j+" ")
+        }
+        console.log("\n");
+      }
+      //网页中显示
+      document.write("<table>");
+      for(var a=1;a<10;a++) {
+        document.write("<tr>");
+        for(var b=1;b<=a;b++) {
+          document.write("<td>"+a+"*"+b+"="+a*b+"</td>"+ "\t");
+        }
+        document.write("</tr>"+"\n");
+       }
+      document.write("</table>");
+    </script>
+      
+</body>
+</html>

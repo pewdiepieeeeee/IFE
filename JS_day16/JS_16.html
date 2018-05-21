@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="5" placeholder="第一个数字">
+    <input id="second-number" type="number" value="5" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+        var add=document.getElementById("add-btn");
+        var min=document.getElementById("minus-btn");
+        var time=document.getElementById("times-btn");
+        var divi=document.getElementById("divide-btn");
+        add.onclick=function() {
+        var x=parseFloat(document.getElementById("first-number").value);
+        var y=parseFloat(document.getElementById("second-number").value);
+            document.getElementById("result").innerHTML=x+y;
+        }
+         min.onclick=function() {
+            var x=parseFloat(document.getElementById("first-number").value);
+        var y=parseFloat(document.getElementById("second-number").value);
+            document.getElementById("result").innerHTML=x-y;
+        }
+         time.onclick=function() {
+            var x=parseFloat(document.getElementById("first-number").value);
+        var y=parseFloat(document.getElementById("second-number").value);
+            document.getElementById("result").innerHTML=x*y;
+        }
+         divi.onclick=function() {
+            var x=parseFloat(document.getElementById("first-number").value);
+        var y=parseFloat(document.getElementById("second-number").value);
+            document.getElementById("result").innerHTML=x/y;
+        }
+    </script>
+</body>
+</html>
