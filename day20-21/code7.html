@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            div {
+                width: 480px;
+                height: 480px;
+                margin:0 auto;
+                background: url(erik_ce204002.jpg) no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+       <div id="picdiv"></div>
+       <script>
+           window.onload = function() {
+               var div=document.getElementById("picdiv");
+               var i=0;
+               function change() {
+                div.style.backgroundPosition= 0 +"px "+ (-480*i) + "px";
+                i++;
+                if(i==16) {
+                    clearInterval(tochangeid);
+                    function back() {
+                        div.style.backgroundPosition= 0 +"px "+ (-480*i) + "px";
+                        i--;
+                        if(i==0) {
+                            clearInterval(backid);
+                            tochangeid=setInterval(change,100);
+                        }
+                        
+                    }
+                    var backid=setInterval(back,100);
+                }
+               }
+               var tochangeid=setInterval(change,100);
+           }
+       </script>
+    </body>
+</html>

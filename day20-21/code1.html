@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <input id="name" type="text">    
+        <button id="submit-btn">Submit</button>
+    <script>
+        var btn=document.getElementById("submit-btn");
+        var textcontent=document.getElementById("name");
+        function btnclick() {
+            console.log(textcontent.value);
+        }
+        function keydown(e) {
+            if(e.keyCode==13 || e.Which==13) {
+                btnclick();
+            }
+            else if(e.keyCode==27 || e.Which==27) {
+                cleartext(e);
+            }
+        }
+        function cleartext(e) {
+            e.target.value="";
+        }
+        btn.onclick=btnclick;
+        textcontent.onkeydown=keydown;
+    </script>
+    </body>
+</html>

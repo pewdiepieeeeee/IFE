@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+    <button id="fade-btn">淡出</button>
+    <script>
+        var btn=document.getElementById("fade-btn");
+        var box=document.getElementById("fade-obj");
+        var flagout=false;
+        var fadeoutid;
+        var flagin=false;
+        var fadeinid;
+        box.style.opacity=1;
+        function fadeout() {
+            flagout=true;
+            box.style.opacity=box.style.opacity-0.1;
+            btn.disabled="disabled";
+            if(box.style.opacity>0) {
+                fadeoutid=setTimeout("fadeout()",1000);
+            }
+            else {
+                clearTimeout(fadeoutid);
+                btn.disabled=false;
+                btn.innerHTML="淡入";
+                flagout=false;
+            }
+        }
+        function fadein() {
+            flagin=true;
+            box.style.opacity=(box.style.opacity*10+1)/10;
+            btn.disabled="disabled";
+            if(box.style.opacity<1) {
+                fadeinid=setTimeout("fadein()",1000);
+            }
+            else {
+                clearTimeout(fadeinid);
+                btn.disabled=false;
+                btn.innerHTML="淡出";
+                flagin=false;
+            }
+        }
+        function startout() {
+            if(!flagout && btn.innerHTML=="淡出") {
+             fadeout();
+            }
+        }
+         function startin() {
+            if(!flagin && btn.innerHTML=="淡入") {
+             fadein();
+            }
+        }
+        btn.addEventListener("click",startout);
+        btn.addEventListener("click",startin);
+    </script>
+    </body>
+</html>
