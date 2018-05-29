@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+            var arr1 = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+            var arr2 = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+            var arr3 = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+            var arr4 = [
+                      {
+                          id: 1,
+                          name: 'candy',
+                          value: 40
+                      }, {
+                          id: 2,
+                          name: 'Simon',
+                          value: 50
+                      }, {
+                          id: 3,
+                          name: 'Tony',
+                          value: 45
+                      }, {
+                          id: 4,
+                          name: 'Annie',
+                          value: 60
+                      }
+                  ];
+            function compare1(a,b) {
+                return a-b;
+            }
+            function compare2(a,b) {
+                return b-a;
+            }
+            function compare3(a,b) {
+                return b[1]-a[1];
+            }
+            var mapped = arr4.map(function(el,i) {
+                return {index:i, value:el.value};
+            });
+            mapped.sort(function(a,b) {
+                return a.value - b.value;
+            });
+            var result = mapped.map(function(el) {
+                return arr4[el.index];
+            })
+            console.log(arr1.sort(compare1));
+            console.log(arr1.sort(compare2));
+            console.log(arr2.sort());
+            console.log(arr2.sort().reverse());
+            console.log(arr3.sort(compare3));
+            console.log(result);
+        </script>
+    </body>
+</html>
