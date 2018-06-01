@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            function startTime() {
+                var myDate=new Date();
+                form(myDate);
+                setTimeout("startTime()",1000);
+            }
+            function whatDay(day) {
+                var myDay=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+                return myDay[day];
+            }
+            function check(i) {
+                if(i<10) {
+                    i="0"+i;
+                }
+                return i;
+            }
+            function form(date) {
+                document.getElementById("para").innerHTML=date.getFullYear()+"年"+check(date.getMonth()+1)+"月"+check(date.getDate())+"日"+whatDay(date.getDay())+" "+check(date.getHours())+":"+check(date.getMinutes())+":"+check(date.getSeconds());
+            }
+        </script>
+    </head>
+    <body onload="startTime()">
+        <p id="para"></p>
+    </body>
+</html>

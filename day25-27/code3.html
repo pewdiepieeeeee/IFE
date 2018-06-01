@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            function startTime1() {
+                var myDate=new Date();
+                form1(myDate);
+                setTimeout("startTime1()",1000);
+            }
+            function whatDay1(day) {
+                var myDay=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                return myDay[day];
+            }
+            function check1(i) {
+                if(i<10) {
+                    i="0"+i;
+                }
+                return i;
+            }
+            function checkHour(hour) {
+                if(hour>12) {
+                    hour=hour-12;
+                }
+                return hour;
+            }
+            function aOrp(hour) {
+                if(hour<13) {
+                    return "AM";
+                }
+                return "PM";
+            }
+            function form1(date) {
+                document.getElementById("para").innerHTML=date.getFullYear()+"-"+check1(date.getMonth()+1)+"-"+check1(date.getDate())+" "+whatDay1(date.getDay())+" "+check1(checkHour(date.getHours()))+":"+check1(date.getMinutes())+":"+check1(date.getSeconds())+" "+aOrp(date.getHours());
+            }
+        </script>
+    </head>
+    <body onload="startTime1()">
+        <p id="para"></p>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            function startTime() {
+                var myDate=new Date();
+                form(myDate);
+                setTimeout("startTime()",1000);
+            }
+            function whatDay(day) {
+                var myDay=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+                return myDay[day];
+            }
+            function check(i) {
+                if(i<10) {
+                    i="0"+i;
+                }
+                return i;
+            }
+            function form(date) {
+                document.getElementById("para").innerHTML=date.getFullYear()+"年"+check(date.getMonth()+1)+"月"+check(date.getDate())+"日"+whatDay(date.getDay())+" "+check(date.getHours())+":"+check(date.getMinutes())+":"+check(date.getSeconds());
+            }
+            function startTime1() {
+                var myDate=new Date();
+                form1(myDate);
+                setTimeout("startTime1()",1000);
+            }
+            function whatDay1(day) {
+                var myDay=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                return myDay[day];
+            }
+            function checkHour(hour) {
+                if(hour>12) {
+                    hour=hour-12;
+                }
+                return hour;
+            }
+            function aOrp(hour) {
+                if(hour<13) {
+                    return "AM";
+                }
+                return "PM";
+            }
+            function form1(date) {
+                document.getElementById("para1").innerHTML=date.getFullYear()+"-"+check(date.getMonth()+1)+"-"+check(date.getDate())+" "+whatDay1(date.getDay())+" "+check(checkHour(date.getHours()))+":"+check(date.getMinutes())+":"+check(date.getSeconds())+" "+aOrp(date.getHours());
+            }
+            window.onload=function() {
+                startTime();
+                startTime1();
+            }
+        </script>
+    </head>
+    <body>
+        <p id="para"></p>
+        <p id="para1"></p>
+    </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <select id="year-select">
+<!--             <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            ……
+            <option value="2032">2002</option> -->
+        </select>
+        
+        <select id="month-select">
+<!--             <option value="1">1</option>
+            <option value="2">2</option>
+            ……
+            <option value="12">12</option> -->
+        </select>
+        
+        <select id="day-select">
+<!--             <option value="1">1</option>
+            <option value="2">2</option>
+            ……
+            <option value="31">31</option> -->
+        </select>
+        
+        <select id="hour-select">
+<!--             <option value="0">00</option>
+            <option value="1">01</option>        
+            ……
+            <option value="23">23</option> -->
+        </select>
+        
+        <select id="minite-select">
+<!--             <option value="0">0</option>
+            <option value="1">1</option>
+            ……
+            <option>59</option> -->
+        </select>
+        
+        <select id="second-select">
+<!--             <option value="0">0</option>
+            <option value="1">1</option>
+            ……
+            <option>59</option> -->
+        </select>
+
+        <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+        
+        <script>
+            function creatNumber(id,firstone,lastone) {
+                var t=document.getElementById(id);
+                for(;firstone<=lastone;) {
+                    var newnode=document.createElement("option");
+                    newnode.setAttribute("value",firstone);
+                    newnode.innerHTML=check(firstone);
+                    t.appendChild(newnode);
+                    firstone++;
+                }
+            }
+            function dateNum(yearid,monthid,dayid) {
+                var t=document.getElementById(monthid);
+                var m=t[t.selectedIndex].value;
+                document.getElementById(dayid).length=0;
+                if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12) {
+                    creatNumber(dayid,1,31);
+                }
+                else if(m==2) {
+                    var y=document.getElementById(yearid);
+                    var yn=y[y.selectedIndex].value;
+                    if(yn%4==0 ||yn%400==0) {
+                        creatNumber(dayid,1,29);
+                    }
+                    else {
+                        creatNumber(dayid,1,28);
+                    }
+                }
+                else {
+                    creatNumber(dayid,1,30);
+                }
+            } 
+            function check(i) {
+                if(i<10) {
+                    i="0"+i;
+                }
+                return i;
+            }
+            function findHtml(id) {
+                var secle=document.getElementById(id);
+                var html=secle[secle.selectedIndex].innerHTML;
+                return html;
+            }
+            function findValue(id) {
+                var secle=document.getElementById(id);
+                var val=secle[secle.selectedIndex].value;
+                return val;
+            }
+            function whatDay(day) {
+                var myDay=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+                return myDay[day];
+            }
+            function findDate(year,month,day,hour,minute,second) {
+                var day1=new Date(findValue(year)+"/"+findValue(month)+"/"+findValue(day)+" "+findValue(hour)+":"+findValue(minute)+":"+findValue(second));
+                return whatDay(day1.getDay());
+            }
+            function gap(year,month,day,hour,minute,second,i) {
+                var targetTime=new Date(findValue(year)+"/"+findValue(month)+"/"+findValue(day)+" "+findValue(hour)+":"+findValue(minute)+":"+findValue(second));
+                var nowTime=new Date();
+                var gapMiliTime=targetTime.getTime()-nowTime.getTime();
+                var y=1;
+                if(gapMiliTime<0) {
+                    gapMiliTime=Math.abs(gapMiliTime);
+                    y=0;
+                }
+                var day=Math.floor(gapMiliTime/(24*3600*1000));
+                var leave1=gapMiliTime%(24*3600*1000);
+                var hour=Math.floor(leave1/(3600*1000));
+                var leave2=leave1%(3600*1000);
+                var minu=Math.floor(leave2/(60*1000));
+                var leave3=leave2%(60*1000);
+                var sec=Math.round(leave3/1000);
+                var dateArr=[day,hour,minu,sec,y];
+                return dateArr[i];
+            }
+            function getGap(i) {
+                return gap("year-select","month-select","day-select","hour-select","minite-select","second-select",i);
+            }
+            function nowOrPast() {
+                if(getGap(4)==1) {
+                    return "还有";
+                }
+                return "已经过去";
+            }
+            function form(year,month,day,hour,minute,second) {
+                document.getElementById("result-wrapper").innerHTML = "现在距离"+" "+findHtml(year)+"年"+findHtml(month)+"月"+findHtml(day)+"日"+findDate(year,month,day,hour,minute,second)+" "+findHtml(hour)+":"+findHtml(minute)+":"+findHtml(second)+" "+nowOrPast()+getGap(0)+"天"+getGap(1)+"小时"+getGap(2)+"分钟"+getGap(3)+"秒";
+            }
+            creatNumber("year-select",2000,2050);
+            creatNumber("month-select",1,12);
+            creatNumber("hour-select",0,23);
+            creatNumber("minite-select",0,59);
+            creatNumber("second-select",0,59);
+            dateNum("year-select","month-select","day-select");
+            form("year-select","month-select","day-select","hour-select","minite-select","second-select");
+            setInterval('form("year-select","month-select","day-select","hour-select","minite-select","second-select")',500);
+            // document.getElementById("year-select").addEventListener("change",dateNum("year-select","month-select","day-select"));  这种方式调用不起效，只知道是函数部分造成；
+            // document.getElementById("month-select").addEventListener("change",'dateNum("year-select","month-select","day-select")');
+            document.getElementById("year-select").addEventListener("change",function() {
+                dateNum("year-select","month-select","day-select");
+            });
+            document.getElementById("month-select").addEventListener("change",function() {
+                dateNum("year-select","month-select","day-select");
+            });
+            var seles=document.getElementsByTagName("select");
+            for(var i=0;i<seles.length;i++) {
+                seles[i].addEventListener("change",function() {
+                    form("year-select","month-select","day-select","hour-select","minite-select","second-select");
+                });
+            }
+        </script>
+    </body>
+</html>
