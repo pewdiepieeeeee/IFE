@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            * {
+                margin:0;
+                padding: 0;
+            }
+            #email-input {
+                display: block;
+                width: 202px;
+                height: 25px;
+                margin:5px auto 0px;
+                padding-left: 10px;
+                box-sizing: border-box;
+                border: 1px solid #dcdcdc;
+            }
+            ul {
+                list-style: none;
+                margin:0 auto;
+                width: 200px;
+                border: 1px solid #dcdcdc;
+            }
+            li {
+                list-style: none;
+                width: 200px;
+                height: 25px;
+                padding-left: 10px;
+                line-height: 25px;
+                box-sizing: border-box;
+            }
+            li:hover {
+                background-color: #BFDDED;
+            }
+            /*#email-sug-wrapper li:nth-child(1) {
+                background-color: #FFC5CF;
+            }
+            #email-sug-wrapper li:nth-child(4) {
+                background-color: #BFDDED;
+            }*/
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <input id="email-input" type="text" autofocus>
+            <ul id="email-sug-wrapper" class="email-sug">
+            </ul>
+        </div>
+        <script>
+            function getChoice(event) {
+                
+                // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+                // 控制email-sug-wrapper的显示/隐藏状态
+                addLiToUl();
+                hideOrShow();
+                var x = event.which || event.keyCode;
+                if(!(x ==38 || x==40 || x==13)) {
+                    reset();
+                }
+                if(x == 27) {
+                    inp.select();
+                }
+            }
+            
+            function getTriText() {
+                // 拿到input输入框的输入内容trim后返回   
+                return (inp.value.replace(/ /g,''));
+            }
+            function htmlEncode(html) {
+                var temp=document.createElement('div');
+                (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                return temp.innerHTML;
+            }
+            function htmlDecode(text) {
+                var temp=document.createElement('div');
+                temp.innerHTML=text;
+                var output = temp.innerText || temp.textContent;
+                temp = null;
+                return output;
+            }
+            function getLiArr() {
+                // 获取用户输入
+                // 遍历postfixList {
+                //     把用户输入和每一个postfix进行结合成为每一个Li
+                // }
+                // 返回生成的提示内容
+                var arr=[];
+                var text=getTriText();
+                var backwardedstr='';
+                if(text.indexOf('@') != -1) {
+                    backwardedstr = text.slice(text.indexOf('@')+1);
+                    text=text.slice(0,text.indexOf('@'));
+                }
+
+                for(var i=0,j=0;i<postfixList.length;i++) {
+                    if(postfixList[i].slice(0,backwardedstr.length) == backwardedstr ) {
+                        var newNode=document.createElement('li');
+                        newNode.innerHTML=text + '@' + postfixList[i];
+                        newNode.innerHTML = htmlEncode(newNode.innerHTML);
+                        arr[j]=newNode;
+                        j++;
+                    }
+                }
+                if(arr.length == 0) {
+                    for(var i=0;i<postfixList.length;i++) {
+                        var newNode=document.createElement('li');
+                        newNode.innerHTML=text + '@' + postfixList[i];
+                        arr[i]=newNode;
+                    }
+                }
+                arr[nowSelectTipIndex].style.backgroundColor='#FFC5CF';
+                return arr;
+            }
+            function reset() {
+                nowSelectTipIndex=0;
+            }
+            function keyborad(event) {
+                var list=ul.getElementsByTagName('li');
+                var x = event.which || event.keyCode;
+                if(x == 38) {
+                    if(nowSelectTipIndex != 0) {
+                        nowSelectTipIndex--;
+                    }
+                    else {
+                        nowSelectTipIndex=list.length-1;
+                    }
+                }
+                if(x == 40) {
+                    if(nowSelectTipIndex != list.length-1) {
+                        nowSelectTipIndex++;
+                    }
+                    else {
+                        nowSelectTipIndex=0;
+                    }
+                }
+                if(x == 13) {
+                    inp.value = htmlDecode(list[nowSelectTipIndex].innerHTML);
+                    hide();
+                }
+            }
+            function addLiToUl() {
+                // 获取生成提示框中的提示内容
+                // 将内容添加到email-sug-wrapper中
+                ul.innerHTML='';
+                var arr=getLiArr();
+                for(var i=0;i<arr.length;i++) {
+                    ul.appendChild(arr[i]);
+                }
+            }
+            
+            function hideOrShow() {
+                // if 用户输入为空 {
+                //     隐藏提示框
+                // } else {
+                //     显示提示框
+                // }
+                if(getTriText()==='') {
+                    hide();
+                } else {
+                    show();
+                }
+            }
+            
+            function hide() {
+                // 做具体隐藏提示框的操作
+                ul.style.display= 'none';
+            }
+            
+            function show() {
+                // 做具体显示提示框的操作
+                ul.style.display= 'block';
+            }
+            
+            var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+            var inp = document.getElementById('email-input');
+            var ul = document.getElementById('email-sug-wrapper');
+            var nowSelectTipIndex = 0;
+            inp.addEventListener('keyup',getChoice);
+            inp.addEventListener('keydown',keyborad);
+            ul.addEventListener('click',function(ev) {
+            //     if 被点击的是不是提示框中的Li节点 {
+            //         获取被点击Li对应的提示内容
+            //         将内容放到input输入框中
+            //         隐藏输入框
+            //     }
+                var e=ev || window.event;
+                e=e.target || e.srcElement;
+                if(e.nodeName.toLowerCase() == 'li') {
+                    inp.value=e.innerHTML;
+                    hide();
+                    inp.focus();
+                }
+                ev.stopPropagation();
+            },false);
+        </script>
+    </body>
+</html>

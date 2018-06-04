@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            * {
+                margin:0;
+                padding: 0;
+            }
+            #email-input {
+                display: block;
+                width: 202px;
+                height: 25px;
+                margin:5px auto 0px;
+                padding-left: 10px;
+                box-sizing: border-box;
+                border: 1px solid #dcdcdc;
+            }
+            ul {
+                list-style: none;
+                margin:0 auto;
+                width: 200px;
+                border: 1px solid #dcdcdc;
+            }
+            li {
+                list-style: none;
+                width: 200px;
+                height: 25px;
+                padding-left: 10px;
+                line-height: 25px;
+                box-sizing: border-box;
+            }
+            li:hover {
+                background-color: #BFDDED;
+            }
+            /*#email-sug-wrapper li:nth-child(1) {
+                background-color: #FFC5CF;
+            }
+            #email-sug-wrapper li:nth-child(4) {
+                background-color: #BFDDED;
+            }*/
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <input id="email-input" type="text">
+            <ul id="email-sug-wrapper" class="email-sug">
+            </ul>
+        </div>
+        <script>
+            function getChoice() {
+                
+                // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+                // 控制email-sug-wrapper的显示/隐藏状态
+                addLiToUl();
+                hideOrShow();
+            }
+            
+            function getTriText() {
+                // 拿到input输入框的输入内容trim后返回   
+                return (inp.value.replace(/ /g,''));
+            }
+            function htmlEncode(html) {
+                var temp=document.createElement('div');
+                (temp.textContent != undefined) ? (temp.textContent = html) : (temp.innerText = html);
+                return temp.innerHTML;
+            }
+            function htmlDecode(text) {
+                var temp=document.createElement('div');
+                temp.innerHTML=text;
+                var output = temp.innerText || temp.textContent;
+                temp = null;
+                return output;
+            }
+            function getLiArr() {
+                // 获取用户输入
+                // 遍历postfixList {
+                //     把用户输入和每一个postfix进行结合成为每一个Li
+                // }
+                // 返回生成的提示内容
+                var arr=[];
+                var text=getTriText();
+                var backwardedstr='';
+                if(text.indexOf('@') != -1) {
+                    backwardedstr = text.slice(text.indexOf('@')+1);
+                    text=text.slice(0,text.indexOf('@'));
+                }
+
+                for(var i=0,j=0;i<postfixList.length;i++) {
+                    if(postfixList[i].slice(0,backwardedstr.length) == backwardedstr ) {
+                        var newNode=document.createElement('li');
+                        newNode.innerHTML=text + '@' + postfixList[i];
+                        newNode.innerHTML = htmlEncode(newNode.innerHTML);
+                        arr[j]=newNode;
+                        j++;
+                    }
+                }
+                if(arr.length == 0) {
+                    for(var i=0;i<postfixList.length;i++) {
+                        var newNode=document.createElement('li');
+                        newNode.innerHTML=text + '@' + postfixList[i];
+                        arr[i]=newNode;
+                    }
+                }
+                return arr;
+            }
+            
+            function addLiToUl() {
+                // 获取生成提示框中的提示内容
+                // 将内容添加到email-sug-wrapper中
+                ul.innerHTML='';
+                var arr=getLiArr();
+                for(var i=0;i<arr.length;i++) {
+                    if(i==0) {
+                        arr[i].style.backgroundColor='#FFC5CF';
+                    }
+                    ul.appendChild(arr[i]);
+                }
+            }
+            
+            function hideOrShow() {
+                // if 用户输入为空 {
+                //     隐藏提示框
+                // } else {
+                //     显示提示框
+                // }
+                if(getTriText()==='') {
+                    hide();
+                } else {
+                    show();
+                }
+            }
+            
+            function hide() {
+                // 做具体隐藏提示框的操作
+                ul.style.display= 'none';
+            }
+            
+            function show() {
+                // 做具体显示提示框的操作
+                ul.style.display= 'block';
+            }
+            function reset() {
+                // 找到当前为选中状态的Li
+                // if (当前选中状态Li不是第一个) {
+                //     清除掉它的选中状态
+                //     设置第一个Li为选中状态
+                // }
+                var list=ul.getElementsByTagName('li');
+                var y=0;
+                for(var i=0;i<list.length;i++) {
+                    if(list[i].style.backgroundColor == 'rgb(255, 197, 207)') {
+                        y=i;
+                    }
+                }
+                if(y!=0) {
+                    list[y].style.backgroundColor = '';
+                    list[0].style.backgroundColor = '#FFC5CF';
+                }
+            }
+            
+            // 监听特殊3个键的键盘事件，这个事件可能就是inputDom的输入监听，也有可能是另外一个，请自己测试后判断
+            function keyborad(event) {
+                // 找到当前为选中状态的Li
+                // 清除掉它的选中状态
+                // if 按的是上键 {
+                //     if 找到的Li不是第一个 {
+                //         将它的前一个Li设为选中
+                //     } else {
+                //         将最后一个Li设为选中
+                //     }
+                // }
+                // if 按的是下键 {
+                //     if 找到的Li不是最后一个 {
+                //         将它的下一个Li设为选中
+                //     } else {
+                //         将第一个Li设为选中
+                //     }
+                var list=ul.getElementsByTagName('li');
+                var y;
+                var x=event.which || event.keyCode;
+                for(var i=0;i<list.length;i++) {
+                    if(list[i].style.backgroundColor == 'rgb(255, 197, 207)') {
+                        y=i;
+                        // list[i].style.backgroundColor = '';
+                    }
+                }
+                if(x == 38) {
+                    list[y].style.backgroundColor = '';
+                    if(y!=0) {
+                        list[y-1].style.backgroundColor = '#FFC5CF';
+                    } else {
+                        list[list.length-1].style.backgroundColor = '#FFC5CF';
+                    }
+                }
+                if(x == 40) {
+                    list[y].style.backgroundColor = '';
+                    if(y!=(list.length-1)) {
+                        list[y+1].style.backgroundColor = '#FFC5CF';
+                    } else {
+                        list[0].style.backgroundColor = '#FFC5CF';
+                    }
+                }
+                if(x == 13) {
+                    for(var i=0;i<list.length;i++) {
+                    if(list[i].style.backgroundColor == 'rgb(255, 197, 207)') {
+                        inp.value=list[i].innerHTML;
+                        }
+                    }
+                    hide();
+                }
+                if(!(x ==38 || x==40 || x==13)) {
+                    reset();
+                }
+
+            }
+            var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+            var inp = document.getElementById('email-input');
+            var ul = document.getElementById('email-sug-wrapper');
+            inp.addEventListener('input',getChoice);
+            inp.addEventListener('keydown',keyborad);
+            ul.addEventListener('click',function(ev) {
+            //     if 被点击的是不是提示框中的Li节点 {
+            //         获取被点击Li对应的提示内容
+            //         将内容放到input输入框中
+            //         隐藏输入框
+            //     }
+                var e=ev || window.event;
+                e=e.target || e.srcElement;
+                if(e.nodeName.toLowerCase() == 'li') {
+                    inp.value=e.innerHTML;
+                    hide();
+                }
+                ev.stopPropagation();
+            },false);
+
+        </script>
+    </body>
+</html>
