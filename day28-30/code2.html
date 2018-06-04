@@ -54,10 +54,10 @@
                 // 控制email-sug-wrapper的显示/隐藏状态
                 addLiToUl();
                 hideOrShow();
-                var x = event.which || event.keyCode;
-                if(!(x ==38 || x==40 || x==13)) {
-                    reset();
-                }
+                // var x = event.which || event.keyCode;
+                // if(!(x ==38 || x==40 || x==13)) {
+                //     reset();
+                // }
                 if(x == 27) {
                     inp.select();
                 }
@@ -86,7 +86,7 @@
                 // }
                 // 返回生成的提示内容
                 var arr=[];
-                var text=getTriText();
+                var text=htmlEncode(getTriText());
                 var backwardedstr='';
                 if(text.indexOf('@') != -1) {
                     backwardedstr = text.slice(text.indexOf('@')+1);
@@ -97,7 +97,6 @@
                     if(postfixList[i].slice(0,backwardedstr.length) == backwardedstr ) {
                         var newNode=document.createElement('li');
                         newNode.innerHTML=text + '@' + postfixList[i];
-                        newNode.innerHTML = htmlEncode(newNode.innerHTML);
                         arr[j]=newNode;
                         j++;
                     }
@@ -138,6 +137,13 @@
                     inp.value = htmlDecode(list[nowSelectTipIndex].innerHTML);
                     hide();
                 }
+                if(!(x ==38 || x==40 || x==13)) {
+                    reset();
+                }
+                if(x == 27) {
+                    inp.select();
+                }
+                addLiToUl();
             }
             function addLiToUl() {
                 // 获取生成提示框中的提示内容
@@ -176,7 +182,7 @@
             var inp = document.getElementById('email-input');
             var ul = document.getElementById('email-sug-wrapper');
             var nowSelectTipIndex = 0;
-            inp.addEventListener('keyup',getChoice);
+            inp.addEventListener('input',getChoice);
             inp.addEventListener('keydown',keyborad);
             ul.addEventListener('click',function(ev) {
             //     if 被点击的是不是提示框中的Li节点 {
