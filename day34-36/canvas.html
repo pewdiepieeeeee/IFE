@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script>
+            function draw() {
+                var canvas=document.getElementById("firstone");
+                if(canvas.getContext) {
+                    var ctx=canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.moveTo(50,50);
+                    ctx.lineTo(450,50);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.strokeRect(50,100,400,100);
+                    ctx.beginPath();
+                    ctx.arc(250,250,25,0,Math.PI*2,true);
+                    ctx.stroke();
+                    ctx.font="35px serif";
+                    ctx.fillText("hello world",160,320);
+                    ctx.beginPath();
+                    ctx.arc(250,400,50,0,Math.PI*2,true);
+                    ctx.moveTo(295,400)
+                    ctx.arc(250,400,45,0,Math.PI*2,true);
+                    ctx.moveTo(250,400);
+                    ctx.lineTo(250,360);
+                    ctx.moveTo(250,400);
+                    ctx.lineTo(270,400);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(250,500);
+                    ctx.quadraticCurveTo(255,460,300,475);
+                    ctx.quadraticCurveTo(325,490,325,500);
+                    ctx.quadraticCurveTo(325,525,250,570);
+                    ctx.quadraticCurveTo(175,525,175,500);
+                    ctx.quadraticCurveTo(179,480,200,475);
+                    ctx.quadraticCurveTo(245,475,250,500);
+                    ctx.fillStyle="red";
+                    ctx.fill();
+                    ctx.font="35px serif";
+                    ctx.fillStyle="black";
+                    ctx.fillText("连云朵都是爱你的形状",100,600);
+                }
+            }
+        </script>
+        <style type="text/css">
+            canvas {
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body onload="draw()">
+        <canvas id="firstone" width="500" height="800"></canvas>
+    </body>
+</html>
