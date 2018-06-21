@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<?xml version="1.0" standalone="no"?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #con {
+                width:1300px;
+                height:500px;
+            }
+            tr:hover {
+                background-color: aqua;
+            }
+            #table-wrapper td {
+                width:130px;
+                height: 30px;
+            }
+            #table-wrapper input {
+                width:130px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="region-radio-wrapper"></div>
+        <div id="product-radio-wrapper"></div>
+        <div id="table-wrapper"></div>
+        <!-- <button type="button" onclick="keepData()">保存</button> -->
+        <div id="con">
+            <div style="float:left;" id="svg">
+                <svg width="650" height="430" id="column" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="30" y1="0" x2="30" y2="400" style="stroke:black;stroke-width:2;opacity: 0.5"/>
+                    <line x1="30" y1="400" x2="650" y2="400" style="stroke:black;stroke-width:2;opacity: 0.5"/>
+                    <line x1="30" y1="300" x2="650" y2="300" style="stroke:black;stroke-width:2;opacity: 0.1"/>
+                    <text x="0" y="100" fill="black">300</text>
+                    <line x1="30" y1="100" x2="650" y2="100" style="stroke:black;stroke-width:2;opacity: 0.1"/>
+                    <text x="0" y="200" fill="black">200</text>
+                    <line x1="30" y1="200" x2="650" y2="200" style="stroke:black;stroke-width:2;opacity: 0.1"/>
+                    <text x="0" y="300" fill="black">100</text>
+                    <g id="columnCon"></g>
+                </svg>
+            </div>
+            <div id="canvas" style="float:left;">
+                <!-- <canvas id="line" width="650" height="430"></canvas> -->
+            </div>
+        </div>
+        <script type="text/javascript" src="JS/sourcedata.js"></script>
+        <script type="text/javascript" src="JS/createCheckbox.js"></script>
+        <script type="text/javascript" src="JS/getSale.js"></script>
+        <script type="text/javascript" src="JS/textCheck.js"></script>
+        <script type="text/javascript" src="JS/createTable.js"></script>
+        <script type="text/javascript" src="JS/createInput.js"></script>
+        <script type="text/javascript" src="JS/keepData.js"></script>
+        <script type="text/javascript" src="JS/app.js"></script>
+        <script type="text/javascript" src="JS/bar.js"></script>
+        <script type="text/javascript" src="JS/line.js"></script>
+        <script type="text/javascript" src="JS/addevent1.js"></script>
+        <script type="text/javascript" src="JS/multipleline.js"></script>
+    </body>
+</html>
