@@ -58,7 +58,7 @@ function createTable() {
                     var td=document.createElement('td');
                     td.title='编辑';
                     var add=true;
-                    if(storage.length) {
+                    if(storage) {
                         for(var stra=0;stra<storage.length;stra++) {
                         if((storage[stra][0]===proArr[zz] && storage[stra][1]===regArr[w]) || (storage[stra][1]===proArr[zz] && storage[stra][0]===regArr[w])) {
                             td.innerHTML=storage[stra][l];
@@ -101,7 +101,7 @@ function createTable() {
                     var td=document.createElement('td');
                     td.title='编辑';
                     var add=true;
-                    if(storage.length) {
+                    if(storage) {
                         for(var stra=0;stra<storage.length;stra++) {
                         if((storage[stra][0]===proArr[ww] && storage[stra][1]===regArr[0]) || (storage[stra][1]===proArr[ww] && storage[stra][0]===regArr[0])) {
                             td.innerHTML=storage[stra][ll];
