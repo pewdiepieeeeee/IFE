@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <button id="a" onclick="pushstate()">A</button>
+        <button id="b" onclick="pushstate()">B</button>
+        <button id="c" onclick="pushstate()">C</button>
+        <div id="cont"></div>
+        <script>
+        /*hash方式*/
+            // function changeHash() {
+            //     var e=window.event;
+            //     btn=e.target||e.srcElement;
+            //     window.location.hash="#"+btn.id;
+            // }
+            // function getHash() {
+            //     return window.location.hash.slice(1);
+            // }
+            // function changeCont() {
+            //     document.getElementById("cont").innerHTML=document.getElementById(getHash()).innerHTML;
+            // }
+            // window.onhashchange=changeCont;
+            // changeCont();
+        
+        /*pushState方式*/
+            function pushstate() {
+                var e=window.event;
+                var btn=e.target || e.srcElement;
+                history.pushState(btn.id.toUpperCase(), null, "file:///C:/Users/troublemaker/Desktop/IFE%E4%BB%BB%E5%8A%A1/day39-41/democode1.html?"+btn.id);
+                changeCont();
+            }
+            function changeCont() {
+                var cont=history.state;
+                document.getElementById("cont").innerHTML=cont;
+            }
+
+            window.onpopstate=changeCont;
+            if(window.location.href.split("?")[1]){
+                changeCont();
+            }
+            
+        </script>
+    </body>
+</html>

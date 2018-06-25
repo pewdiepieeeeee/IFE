@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <button id="a" onclick="pushstate()">A</button>
+        <button id="b" onclick="pushstate()">B</button>
+        <button id="c" onclick="pushstate()">C</button>
+        
+        <button id="d" onclick="pushstate()">D</button>
+        <button id="e" onclick="pushstate()">E</button>
+        <button id="f" onclick="pushstate()">F</button>
+        
+        
+        <div id="contABC"></div>
+        <div id="contDEF"></div>
+        <script>
+        /*hash方式*/
+            // function changeHash() {
+            //     var e=window.event;
+            //     btn=e.target||e.srcElement;
+            //     window.location.hash="#"+btn.id;
+            // }
+            // function getHash() {
+            //     var theHash=window.location.hash.slice(1);
+            //     return theHash;
+            // }
+            // function changeCont() {
+            //     var theHash=getHash();
+            //     if(theHash.length==2) {
+            //         var firstHash=theHash.slice(0,1);
+            //         var secondHash=theHash.slice(1);
+            //         document.getElementById("contABC").innerHTML=document.getElementById(firstHash).innerHTML;
+            //         document.getElementById("contDEF").innerHTML=document.getElementById(secondHash).innerHTML;
+            //     }
+            //     else {
+            //         if(theHash==="a" || theHash==="b" || theHash==="c") {
+            //             document.getElementById("contABC").innerHTML=document.getElementById(theHash).innerHTML;
+            //         }
+            //         else {
+            //             document.getElementById("contDEF").innerHTML=document.getElementById(theHash).innerHTML;
+            //         }
+            //     }
+            //     window.location.hash="#"+document.getElementById("contABC").innerHTML.toLowerCase()+document.getElementById("contDEF").innerHTML.toLowerCase();
+            // }
+            // window.onhashchange=changeCont;
+            // changeCont();
+        /*pushState方式*/
+            function pushstate() {
+                var e=window.event;
+                var btn=e.target || e.srcElement;
+                var currentstate=history.state;
+                if(currentstate != null) {
+                    var aArry="";
+                    var dArry="";
+                    if(currentstate.length==1) {
+                        if(currentstate==="a" || currentstate==="b" || currentstate==="c") {
+                            aArry=currentstate;
+                        }
+                        else {
+                            dArry=currentstate;
+                        }
+                        if(btn.id==="a" || btn.id==="b" || btn.id==="c") {
+                            aArry=btn.id;
+                        }
+                        else {
+                            dArry=btn.id;
+                        }
+                        history.pushState(aArry+dArry, null, "file:///C:/Users/troublemaker/Desktop/IFE%E4%BB%BB%E5%8A%A1/day39-41/democode2.html?"+aArry+dArry);
+                    }
+                    if(currentstate.length==2) {
+                        var firtstcont=currentstate.slice(0,1);
+                        var secondcont=currentstate.slice(1);
+                        if(btn.id==="a" || btn.id==="b" || btn.id==="c") {
+                            firtstcont=btn.id;
+                        }
+                        else {
+                            secondcont=btn.id;
+                        }
+                        history.pushState(firtstcont+secondcont, null, "file:///C:/Users/troublemaker/Desktop/IFE%E4%BB%BB%E5%8A%A1/day39-41/democode2.html?"+firtstcont+secondcont);
+                    }
+                }
+                else {
+                    history.pushState(btn.id, null, "file:///C:/Users/troublemaker/Desktop/IFE%E4%BB%BB%E5%8A%A1/day39-41/democode2.html?"+btn.id);
+                }
+                changeCont();
+            }
+            function changeCont() {
+                document.getElementById("contABC").innerHTML="";
+                document.getElementById("contDEF").innerHTML="";
+                var cont=history.state.toUpperCase();
+                if(cont.length==2) {
+                    var firtstcont=cont.slice(0,1);
+                    var secondcont=cont.slice(1);
+                    document.getElementById("contABC").innerHTML=firtstcont;
+                    document.getElementById("contDEF").innerHTML=secondcont;
+                }
+                else {
+                    if(cont==="A" || cont==="B" || cont==="C") {
+                        document.getElementById("contABC").innerHTML=cont;
+                    }
+                    else {
+                        document.getElementById("contDEF").innerHTML=cont;
+                    }
+                }
+            }
+            window.onpopstate=changeCont;
+            if(window.location.href.split("?")[1]){
+                changeCont();
+            }
+        </script>
+    </body>
+</html>
