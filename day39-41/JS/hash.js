@@ -61,7 +61,7 @@ function pushstate() {
     str=str.replace(/手机/,"a");
     str=str.replace(/笔记本/,"b");
     str=str.replace(/智能音箱/,"c");
-    history.pushState(str,null,"file:///C:/Users/troublemaker/Desktop/IFE%E4%BB%BB%E5%8A%A1/day39-41/code2.html?"+str);
+    history.pushState(str,null,window.location.href.split("?")[0]+"?"+str);
 }
 function setCheckedBox() {
     var checkedboxes=document.querySelectorAll("input[type=checkbox]");
