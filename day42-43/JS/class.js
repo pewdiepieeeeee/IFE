@@ -1,20 +1,20 @@
 //创建Restaurant类并定义属性
-function Restaurant({cash, seats, staff}) {    
-    this.cash = cash;
-    this.seats = seats;
-    this.staff = staff;
+function Restaurant(newRestaurant) {    
+    this.cash = newRestaurant.cash;
+    this.seats = newRestaurant.seats;
+    this.staffList = newRestaurant.staff;
 }
 
 //创建Restaurant类hire方法
 Restaurant.prototype.hire = function (newStaff) {    
-    this.staff.push(newStaff);
+    this.staffList.push(newStaff);
 }
 
 //创建Restaurant类fire方法,通过循环数组找到id并用splice()进行删除
 Restaurant.prototype.fire = function (who) {    
-    for (var i=0; i<this.staff.length; i++) {
-        if (this.staff[i].id===who.id) {
-            this.staff.splice(i, 1);     
+    for (var i=0; i<this.staffList.length; i++) {
+        if (this.staffList[i].id===who.id) {
+            this.staffList.splice(i, 1);     
         }
     }
 }
