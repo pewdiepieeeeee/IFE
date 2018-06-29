@@ -1,17 +1,17 @@
 //创建Restaurant类并定义属性,hire方法fire方法
 class Restaurant {
-    constructor({cash, seats, staff}) {
-        this.cash = cash;
-        this.seats = seats;
-        this.staff = staff;
+    constructor(newRestaurant) {
+        this.cash = newRestaurant.cash;
+        this.seats = newRestaurant.seats;
+        this.staffList = newRestaurant.staff;
     }
     hire(newStaff) {
-        this.staff.push(newStaff);
+        this.staffList.push(newStaff);
     }
     fire(who) {
-        for (var i=0; i<this.staff.length; i++) {
-            if (this.staff[i].id===who.id) {
-                this.staff.splice(i, 1);     
+        for (var i=0; i<this.staffList.length; i++) {
+            if (this.staffList[i].id===who.id) {
+                this.staffList.splice(i, 1);     
             }
         }
     }
