@@ -13,10 +13,12 @@ function runReastaurant() {
     if (!flag) {
         flag = true;
         (function process() {
+            console.log('(顾客入座)');
             var orderList = newWaiter.doWork(myRestaurant.menu);
             var theDish = newCook.doWork(orderList);
             var theSameDish = newWaiter.doWork(theDish);
             Client.prototype.toEat(theSameDish);
+            console.log('(顾客吃完离开)');
             myRestaurant.clientList.shift();
             if (myRestaurant.clientList.length) {
                 process();
