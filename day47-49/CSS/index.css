@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+#whole {
+    width: 1400px;
+    height: 750px;
+    background: blue;
+    margin: 0 auto;
+    display: flex;
+    align-content: flex-start;
+}
+#infor {
+    width: 300px;
+    background: LightYellow;
+    flex: auto;
+}
+#infor #money {
+    width: 300px;
+    height: 170px;
+    background: Khaki;
+}
+#infor #money h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+#infor #money p {
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+#infor #conversation {
+    width: 300px;
+    height: 550px;
+    overflow: auto;
+}
+#infor #conversation h2{
+    text-align: center;
+}
+#infor #conversation p {
+    padding: 0 10px;
+}
+#process {
+    width: 1100px;
+    background: yellow;
+    flex: auto;
+    display: flex;
+    align-content: flex-start;
+    position: relative;
+}
+#que {
+    width: 100px;
+    background: LightGrey;
+    text-align: center;
+    flex: auto;
+}
+#que img {
+    display: inline-block;
+    margin-top: 20px;
+    width: 100px;
+    height: 75px;
+}
+#dining {
+    text-align: center;
+    width: 450px;
+    background: LightCoral;
+    flex: auto;
+}
+#dining img {
+    position: absolute;
+    top: 20px;
+    right: 500px;
+}
+/*#dining img:nth-child(2) {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 20px;
+    right: 750px;
+}*/
+#dining #huangbo {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 20px;
+    right: 750px;
+}
+#dining #state {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 200px;
+    right: 750px;
+}
+#kitchen {
+    text-align: center;
+    width: 450px;
+    background: DeepSkyBlue;
+    flex: auto;
+}
+#kitchen img {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+#kitchen #cookstate {
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 200px;
+    right: 20px;
+}
